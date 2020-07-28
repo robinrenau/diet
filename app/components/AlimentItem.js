@@ -2,18 +2,27 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet, TouchableOpacity, Image,
+    StyleSheet, TouchableOpacity,
 } from 'react-native';
 
-export default AlimentItem = ({aliment, photo}) => {
+export default AlimentItem = ({aliment, navigation}) => {
+
     return (
         <View style={styles.globalContainer}>
             <Text style={styles.titleAdd}>{aliment.food_name} </Text>
-            <TouchableOpacity style={styles.buttonCircleAdd}>
+            <TouchableOpacity
+                style={styles.buttonCircleAdd}
+                onPress={() => navigation.navigate('Home', {
+                    food_name: aliment.food_name,
+
+                })}
+            >
                 <Text style={styles.buttonIconAdd}>+</Text>
             </TouchableOpacity>
         </View>
     )
+
+
 };
 
 const styles = StyleSheet.create({
@@ -29,6 +38,7 @@ const styles = StyleSheet.create({
         margin: 13,
         color: '#219BFE',
         fontSize: 18,
+
     },
     buttonCircleAdd: {
         alignItems: 'center',
@@ -46,6 +56,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
 
 
+    },
+
+    tinyLogo: {
+        width: 50,
+        height: 50,
     },
 
 });

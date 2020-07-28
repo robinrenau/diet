@@ -42,6 +42,7 @@ export default Home = ({navigation}) => {
     const renderItem = ({item}) => (
         <Item title={item.title}/>
     );
+
     return (
         <>
 
