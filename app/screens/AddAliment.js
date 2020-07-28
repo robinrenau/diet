@@ -9,17 +9,24 @@ import {
 import AlimentItem from '../components/AlimentItem';
 import {SearchBar} from 'react-native-elements';
 
+
 export default AddAliment = () => {
     const [textInputValue, setTextInputValue] = useState('');
     const [aliments, setAliments] = useState([]);
     const getAliments = async () => {
         let response = await fetch(
-            'https://restcountries.eu/rest/v2/all'
+            'https://trackapi.nutritionix.com/v2/search/instant/?query=sandwich', {
+                method : 'GET',
+                headers: {
+                    'x-app-id' : '47ab5f38',
+                    'x-app-key' : '0d3791cbe4d65eb19faa480b366986b5',
+                }
+            }
         );
         let jsonResponse = await response.json();
         console.log(jsonResponse);
         if (jsonResponse) {
-            setAliments(jsonResponse);
+            setAliments(jsonResponse.common);
         }
     };
 
@@ -33,13 +40,14 @@ export default AddAliment = () => {
                     placeholder="Cherche un aliment ici"
                     onChangeText={setTextInputValue}
                     value={textInputValue}
+                    lightTheme
                 />
             </View>
             <View>
                 <FlatList
                     data={aliments}
-                    renderItem={({item}) => <AlimentItem content={item.content} id={item.id} />}
-                    keyExtractor={item => 'key' + item.id}
+                    renderItem={({ item }) => <AlimentItem aliment={item} index={item.index}/>}
+                    keyExtractor={item => 'key' + item.food_name}
                 />
             </View>
         </View>

@@ -2,13 +2,13 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet, TouchableOpacity,
+    StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
 
-export default CountryItem = ({aliment}) => {
+export default AlimentItem = ({aliment, photo}) => {
     return (
         <View style={styles.globalContainer}>
-            <Text>nom de l'aliment rechercher</Text>
+            <Text style={styles.titleAdd}>{aliment.food_name} </Text>
             <TouchableOpacity style={styles.buttonCircleAdd}>
                 <Text style={styles.buttonIconAdd}>+</Text>
             </TouchableOpacity>
@@ -19,26 +19,32 @@ export default CountryItem = ({aliment}) => {
 const styles = StyleSheet.create({
 
     globalContainer: {
-        margin: 15,
-        backgroundColor: '#FFFFFF',
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 10,
 
     },
+
+    titleAdd : {
+        margin: 13,
+        color: '#219BFE',
+        fontSize: 18,
+    },
     buttonCircleAdd: {
-        borderColor: 'rgba(0,0,0,0.2)',
         alignItems: 'center',
         justifyContent: 'center',
         width: 35,
         height: 35,
         backgroundColor: '#219BFE',
         borderRadius: 50,
+        marginTop : 8
+
     },
 
     buttonIconAdd: {
         color: '#FFFFFF',
         fontSize: 30,
+
 
     },
 

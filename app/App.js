@@ -12,8 +12,8 @@ export default App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="AddAliment" component={AddAlimentScreen} />
+                <Stack.Screen name="Home" options={{ title: "Aujourd'hui" }} component={HomeScreen} />
+                <Stack.Screen name="AddAliment" options={{ title: "Ajouter un aliment" }} component={AddAlimentScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

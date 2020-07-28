@@ -32,7 +32,7 @@ const Item = ({title}) => (
         <Icon style={styles.logoHome} name="user" size={30}/>
         <Text style={styles.alimentTitle}>{title}</Text>
         <TouchableOpacity style={styles.buttonCircleDelete}>
-            <Text style={styles.buttonIconDelete}>❌</Text>
+            <Text style={styles.buttonIconDelete}>X</Text>
         </TouchableOpacity>
     </View>
 );
@@ -46,7 +46,7 @@ export default Home = ({navigation}) => {
         <>
 
             <SafeAreaView style={styles.backgroundAppli}>
-                <ScrollView>
+
                     <View>
                         <View>
                             <Text style={styles.globalTitle}>Aujourd'hui</Text>
@@ -97,7 +97,7 @@ export default Home = ({navigation}) => {
                             </View>
                         </View>
                     </View>
-                </ScrollView>
+
             </SafeAreaView>
 
         </>
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     buttonIconDelete: {
         color: '#219BFE',
         fontSize: 20,
+        fontWeight: "bold"
     },
 
     alimentContainer: {
