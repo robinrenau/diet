@@ -14,28 +14,52 @@ import TodayAlimentItem from '../components/TodayAlimentItem';
 
 
 export default Home = ({navigation, route}) => {
-    const renderItem = ({item}) => (
-        <Item title={item.title}/>
-    );
-    const [meal, setMeal] = useState(null);
-    const [foodList, setfoodList] = useState([]);
+    const [foodListB, setfoodListB] = useState([]);
+    const [foodListL, setfoodListL] = useState([]);
+    const [foodListD, setfoodListD] = useState([]);
 
     useEffect(() => {
-        if (route.params) {
-            let newState;
-            newState = [...foodList, {
-                id: route.params.id,
-                title: route.params.food_name,
-            }];
-            setfoodList(newState);
-        }
-    }, [route.params]);
+            if (route.params) {
+                let newState;
+                switch (route.params.meal) {
+                    case 'breakfast':
+                        newState = [...foodListB,
+                            {
+                                id: route.params.id,
+                                title: route.params.food_name,
+                                meal: route.params.meal,
+                            },
+                        ];
+                        setfoodListB(newState);
+                        break;
+                    case 'lunch':
+                        newState = [...foodListL, {
+                            id: route.params.id,
+                            title: route.params.food_name,
+                            meal: route.params.meal,
+                        }];
+                        setfoodListL(newState);
+                        break;
+                    case 'dinner':
+                        newState = [...foodListD, {
+                            id: route.params.id,
+                            title: route.params.food_name,
+                            meal: route.params.meal,
+                        }];
+                        setfoodListD(newState);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }, [route.params],
+    );
 
 
     return (
         <>
-
-            <SafeAreaView style={styles.backgroundAppli}>
+            <SafeAreaView>
                 <View>
                     <View>
                         <Text style={styles.globalTitle}>Aujourd'hui</Text>
@@ -44,28 +68,32 @@ export default Home = ({navigation, route}) => {
                         <View style={styles.container}>
                             <Text style={styles.titleMeal}> Petit Déjeuner </Text>
                             <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment')}>
+                                              onPress={() => navigation.navigate('AddAliment', {meal: 'breakfast'})}>
                                 <Text style={styles.buttonIconAdd}>+</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <Text>Vous n'avez pas encore ajouté d'aliments pour ce repas</Text>
+                            <FlatList
+                                data={foodListB}
+                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                keyExtractor={item => 'key' + Math.random(item.food_name)}
+                            />
                         </View>
                     </View>
                     <View style={styles.globalContainer}>
                         <View style={styles.container}>
                             <Text style={styles.titleMeal}>Déjeuner </Text>
                             <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment')}>
+                                              onPress={() => navigation.navigate('AddAliment', {meal: 'lunch'})}>
                                 <Text style={styles.buttonIconAdd}>+</Text>
                             </TouchableOpacity>
 
                         </View>
                         <View>
                             <FlatList
-                                data={foodList}
-                                renderItem={({ item }) => <TodayAlimentItem aliment={item} />}
-                                keyExtractor={item => 'key' + item.food_name}
+                                data={foodListL}
+                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                keyExtractor={item => 'key' + Math.random(item.food_name)}
                             />
 
                         </View>
@@ -74,12 +102,16 @@ export default Home = ({navigation, route}) => {
                         <View style={styles.container}>
                             <Text style={styles.titleMeal}>Dîner</Text>
                             <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment')}>
+                                              onPress={() => navigation.navigate('AddAliment', {meal: 'dinner'})}>
                                 <Text style={styles.buttonIconAdd}>+</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <Text>{route.params ? route.params.food_name : 'vous n\'avez pas encore ajouté d\'aliments pour ce repas'} </Text>
+                            <FlatList
+                                data={foodListD}
+                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                keyExtractor={item => 'key' + Math.random(item.food_name)}
+                            />
                         </View>
                     </View>
                 </View>
@@ -90,10 +122,6 @@ export default Home = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
 
-    backgroundAppli: {
-        backgroundColor: '#F0F8FD',
-    },
-
 
     globalTitle: {
         color: '#219BFE',
@@ -103,7 +131,7 @@ const styles = StyleSheet.create({
     },
 
     buttonCircleAdd: {
-        borderColor: 'rgba(0,0,0,0.2)',
+
         alignItems: 'center',
         justifyContent: 'center',
         width: 35,
@@ -136,7 +164,7 @@ const styles = StyleSheet.create({
     buttonIconAdd: {
         color: '#FFFFFF',
         fontSize: 30,
-
+        paddingBottom: 2,
     },
 
 

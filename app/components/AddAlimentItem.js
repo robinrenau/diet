@@ -2,20 +2,28 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet, TouchableOpacity,
+    StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 
-export default AlimentItem = ({aliment, navigation}) => {
 
+export default AddAlimentItem = ({aliment, meal}) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.globalContainer}>
+            <Image
+                style={{width: 50, height: 50, borderRadius:50}}
+                source={{uri: aliment.photo.thumb }}
+            />
             <Text style={styles.titleAdd}>{aliment.food_name} </Text>
             <TouchableOpacity
                 style={styles.buttonCircleAdd}
-                onPress={() => navigation.navigate('Home', {
+                onPress={() => navigation.navigate('Home',
+                    {
                     food_name: aliment.food_name,
-
-                })}
+                        meal,
+                    }
+                )}
             >
                 <Text style={styles.buttonIconAdd}>+</Text>
             </TouchableOpacity>

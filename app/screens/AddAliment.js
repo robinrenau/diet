@@ -6,12 +6,13 @@ import {
     FlatList, TextInput, Button,
 
 } from 'react-native';
-import AlimentItem from '../components/AlimentItem';
+import AddAlimentItem from '../components/AddAlimentItem';
 
 
 
 
-export default AddAliment = () => {
+
+export default AddAliment = ({route}) => {
     const [textInputValue, setTextInputValue] = React.useState('');
     const [aliments, setAliments] = useState([]);
     const getAliments = async () => {
@@ -40,7 +41,7 @@ export default AddAliment = () => {
 
 
     return (
-        <View style={styles.backgroundAppli}>
+        <View >
             <View style={styles.containerSearch} >
 
                 <TextInput
@@ -58,13 +59,15 @@ export default AddAliment = () => {
             <View>
                 <FlatList
                     data={aliments}
-                    renderItem={({ item }) => <AlimentItem aliment={item} />}
-                    keyExtractor={item => 'key' + item.food_name}
+                    renderItem={({ item }) => <AddAlimentItem aliment={item} meal={route.params.meal}/>}
+                    keyExtractor={item => 'key' + Math.random(item.food_name)}
                 />
             </View>
         </View>
     )
+
 };
+
 const styles = StyleSheet.create({
 
 
