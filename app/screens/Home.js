@@ -73,11 +73,12 @@ export default Home = ({navigation, route}) => {
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <FlatList
+                            {foodListB.length > 0 ? <FlatList
                                 data={foodListB}
                                 renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            />
+                            /> : <Text> Pas d'aliment selectionné</Text>}
+
                         </View>
                     </View>
                     <View style={styles.globalContainer}>
@@ -89,12 +90,12 @@ export default Home = ({navigation, route}) => {
                             </TouchableOpacity>
 
                         </View>
-                        <View>
-                            <FlatList
-                                data={foodListL}
-                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
-                                keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            />
+                        <View>{foodListL.length > 0 ? <FlatList
+                            data={foodListL}
+                            renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                            keyExtractor={item => 'key' + Math.random(item.food_name)}
+                        /> : <Text> Pas d'aliment selectionné</Text>}
+
 
                         </View>
                     </View>
@@ -106,12 +107,12 @@ export default Home = ({navigation, route}) => {
                                 <Text style={styles.buttonIconAdd}>+</Text>
                             </TouchableOpacity>
                         </View>
-                        <View>
-                            <FlatList
-                                data={foodListD}
-                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
-                                keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            />
+                        <View>{foodListD.length > 0 ? <FlatList
+                            data={foodListD}
+                            renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                            keyExtractor={item => 'key' + Math.random(item.food_name)}
+                        /> : <Text> Pas d'aliment selectionné</Text>}
+
                         </View>
                     </View>
                 </View>

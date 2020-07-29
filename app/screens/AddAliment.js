@@ -3,10 +3,12 @@ import React, {useEffect, useState} from 'react';
 import {
     View,
     StyleSheet,
-    FlatList, TextInput, Button,
+    FlatList, TouchableOpacity, Text,
 
 } from 'react-native';
 import AddAlimentItem from '../components/AddAlimentItem';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Fumi } from 'react-native-textinput-effects';
 
 
 
@@ -43,18 +45,23 @@ export default AddAliment = ({route}) => {
     return (
         <View >
             <View style={styles.containerSearch} >
-
-                <TextInput
-                    style={{ height: 40, width:330, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => setTextInputValue(text)}
+                <Fumi style={styles.inputSty}
+                    label={'Cherche un aliment'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'cutlery'}
+                    iconColor={'#219BFE'}
+                    iconSize={20}
+                    iconWidth={40}
+                    inputPadding={16}
                     value={textInputValue}
-                />
-                <Button
+                    onChangeText={text => setTextInputValue(text)}
 
-                    onPress={() => getAliments()}
-                    title="🔎"
-                    color="#F0F8FD"
                 />
+                <TouchableOpacity
+                    onPress={() => getAliments()}
+                >
+                    <Text style={styles.loopSty}>🔎</Text>
+                </TouchableOpacity>
             </View>
             <View>
                 <FlatList
@@ -69,8 +76,14 @@ export default AddAliment = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-
-
+    loopSty:{
+        marginTop:10,
+        marginRight:2,
+        fontSize:25
+    },
+    inputSty:{
+        width:330
+    },
     containerSearch :{
         flexDirection: 'row',
         justifyContent: 'space-between',
