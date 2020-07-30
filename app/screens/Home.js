@@ -52,6 +52,7 @@ export default Home = ({navigation, route}) => {
     useEffect(() => {
             if (route.params) {
                 let newState;
+
                 switch (route.params.meal) {
                     case 'breakfast':
                         newState = [...foodListB,
@@ -98,7 +99,6 @@ export default Home = ({navigation, route}) => {
         }, [route.params],
     );
 
-
     return (
 
         <>
@@ -122,7 +122,7 @@ export default Home = ({navigation, route}) => {
                             <View>
                                 {foodListB.length > 0 ? <FlatList
                                     data={foodListB}
-                                    renderItem={({item}) => <TodayAlimentItem aliment={item}  />}
+                                    renderItem={({item}) => <TodayAlimentItem aliment={item} />}
                                     keyExtractor={item => 'key' + Math.random(item.food_name)}
                                 /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
 
@@ -143,7 +143,7 @@ export default Home = ({navigation, route}) => {
                             </View>
                             <View>{foodListL.length > 0 ? <FlatList
                                 data={foodListL}
-                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                renderItem={({item}) => <TodayAlimentItem aliment={item} />}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
                             /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
                             </View>

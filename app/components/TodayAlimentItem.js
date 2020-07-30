@@ -18,7 +18,8 @@ export default TodayAlimentItem = ({aliment}) => {
             <Text
                 style={styles.alimentTitle}>{aliment.title}</Text>
             <TouchableOpacity style={styles.buttonCircleDelete}
-                onPress={() => this.props.onDelete(this.props.id)}>
+
+            >
                 <Icon
                     name={'close-circle-outline'}
                     color="#219BFE"

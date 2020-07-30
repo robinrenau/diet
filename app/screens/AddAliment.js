@@ -77,9 +77,10 @@ export default AddAliment = ({route}) => {
 
 const styles = StyleSheet.create({
     loopSty:{
-        marginTop:10,
-        marginRight:2,
-        fontSize:25
+
+        fontSize:25,
+        marginTop:10
+
     },
     inputSty:{
         width:330
