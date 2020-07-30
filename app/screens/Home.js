@@ -11,6 +11,8 @@ import {
 import AddAliment from './AddAliment';
 
 import TodayAlimentItem from '../components/TodayAlimentItem';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 
 export default Home = ({navigation, route}) => {
@@ -96,27 +98,31 @@ export default Home = ({navigation, route}) => {
         }, [route.params],
     );
 
-    return (
-        <>
 
+    return (
+
+        <>
             <SafeAreaView>
                 <ScrollView>
-                    <View>
                         <View>
                             <Text style={styles.globalTitle}>Aujourd'hui</Text>
                         </View>
                         <View style={styles.globalContainer}>
                             <View style={styles.container}>
                                 <Text style={styles.titleMeal}> Petit Déjeuner </Text>
-                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                <TouchableOpacity
                                                   onPress={() => navigation.navigate('AddAliment', {meal: 'breakfast'})}>
-                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                    <Icon
+                                        name={'add-circle'}
+                                        color="#219BFE"
+                                        size={35}
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 {foodListB.length > 0 ? <FlatList
                                     data={foodListB}
-                                    renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                    renderItem={({item}) => <TodayAlimentItem aliment={item}  />}
                                     keyExtractor={item => 'key' + Math.random(item.food_name)}
                                 /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
 
@@ -125,9 +131,13 @@ export default Home = ({navigation, route}) => {
                         <View style={styles.globalContainer}>
                             <View style={styles.container}>
                                 <Text style={styles.titleMeal}>Déjeuner </Text>
-                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                <TouchableOpacity
                                                   onPress={() => navigation.navigate('AddAliment', {meal: 'lunch'})}>
-                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                    <Icon
+                                        name={'add-circle'}
+                                        color="#219BFE"
+                                        size={35}
+                                    />
                                 </TouchableOpacity>
 
                             </View>
@@ -136,16 +146,18 @@ export default Home = ({navigation, route}) => {
                                 renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
                             /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
-
-
                             </View>
                         </View>
                         <View style={styles.globalContainer}>
                             <View style={styles.container}>
                                 <Text style={styles.titleMeal}>Dîner</Text>
-                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                <TouchableOpacity
                                                   onPress={() => navigation.navigate('AddAliment', {meal: 'dinner'})}>
-                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                    <Icon
+                                        name={'add-circle'}
+                                        color="#219BFE"
+                                        size={35}
+                                    />
                                 </TouchableOpacity>
                             </View>
                             <View>{foodListD.length > 0 ? <FlatList
@@ -156,7 +168,12 @@ export default Home = ({navigation, route}) => {
 
                             </View>
                         </View>
-                    </View>
+                        <View style={styles.globalContainer}>
+                            <View style={styles.container}>
+                                <Text style={styles.titleMeal}> Résumé </Text>
+
+                            </View>
+                        </View>
                 </ScrollView>
             </SafeAreaView>
         </>
@@ -171,16 +188,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         margin: 20,
-    },
-
-    buttonCircleAdd: {
-
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 35,
-        height: 35,
-        backgroundColor: '#219BFE',
-        borderRadius: 50,
     },
 
     globalContainer: {
@@ -206,12 +213,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#219BFE',
 
-    },
-
-    buttonIconAdd: {
-        color: '#FFFFFF',
-        fontSize: 30,
-        paddingBottom: 2,
     },
 
 

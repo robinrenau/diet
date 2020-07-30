@@ -4,6 +4,7 @@ import {
     Text,
     StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 export default TodayAlimentItem = ({aliment}) => {
@@ -16,8 +17,13 @@ export default TodayAlimentItem = ({aliment}) => {
             />
             <Text
                 style={styles.alimentTitle}>{aliment.title}</Text>
-            <TouchableOpacity style={styles.buttonCircleDelete}>
-                <Text style={styles.buttonIconDelete}>X</Text>
+            <TouchableOpacity style={styles.buttonCircleDelete}
+                onPress={() => this.props.onDelete(this.props.id)}>
+                <Icon
+                    name={'close-circle-outline'}
+                    color="#219BFE"
+                    size={25}
+                />
             </TouchableOpacity>
         </View>
     )
@@ -31,6 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 10,
+
     },
 
     logoHome: {
@@ -48,11 +55,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
     },
-    buttonIconDelete: {
-        color: '#219BFE',
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginRight:8,
-    },
+
 
 });

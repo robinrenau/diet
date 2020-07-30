@@ -5,6 +5,7 @@ import {
     StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/core';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default AddAlimentItem = ({aliment, meal}) => {
@@ -17,7 +18,7 @@ export default AddAlimentItem = ({aliment, meal}) => {
             />
             <Text style={styles.titleAdd}>{aliment.food_name} </Text>
             <TouchableOpacity
-                style={styles.buttonCircleAdd}
+
                 onPress={() => navigation.navigate('Home',
                     {
                         food_name: aliment.food_name,
@@ -26,7 +27,11 @@ export default AddAlimentItem = ({aliment, meal}) => {
                     }
                 )}
             >
-                <Text style={styles.buttonIconAdd}>+</Text>
+                <Icon
+                    name={'add-circle'}
+                    color="#219BFE"
+                    size={35}
+                />
             </TouchableOpacity>
         </View>
     )
@@ -49,23 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
 
     },
-    buttonCircleAdd: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 35,
-        height: 35,
-        backgroundColor: '#219BFE',
-        borderRadius: 50,
-        marginTop : 8
 
-    },
-
-    buttonIconAdd: {
-        color: '#FFFFFF',
-        fontSize: 30,
-
-
-    },
 
     tinyLogo: {
         width: 50,
