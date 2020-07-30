@@ -2,16 +2,18 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet, TouchableOpacity,
+    StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export default TodayAlimentItem = ({aliment}) => {
 
     return (
         <View style={styles.alimentContainer}>
-            <Icon style={styles.logoHome} name="user" size={30}/>
+            <Image
+                style={{width: 50, height: 50, borderRadius:50}}
+                source={{uri: aliment.photo }}
+            />
             <Text
                 style={styles.alimentTitle}>{aliment.title}</Text>
             <TouchableOpacity style={styles.buttonCircleDelete}>

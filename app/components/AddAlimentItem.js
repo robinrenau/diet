@@ -20,8 +20,9 @@ export default AddAlimentItem = ({aliment, meal}) => {
                 style={styles.buttonCircleAdd}
                 onPress={() => navigation.navigate('Home',
                     {
-                    food_name: aliment.food_name,
+                        food_name: aliment.food_name,
                         meal,
+                        photo:aliment.photo
                     }
                 )}
             >

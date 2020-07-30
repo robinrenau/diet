@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import {
     SafeAreaView,
     StyleSheet,
     TouchableOpacity,
     View,
-    Text, FlatList,
+    Text, FlatList, ScrollView,
 
 } from 'react-native';
 import AddAliment from './AddAliment';
@@ -18,6 +18,35 @@ export default Home = ({navigation, route}) => {
     const [foodListL, setfoodListL] = useState([]);
     const [foodListD, setfoodListD] = useState([]);
 
+    const restoreDataFromAsyncStorage = async () => {
+        try {
+            const localStorageListD = await AsyncStorage.getItem('dinner');
+            return localStorageListD != null ? setfoodListD(JSON.parse(localStorageListD)) : null;
+        } catch (error) {
+        }
+    };
+    const restoreDataFromAsyncStorage2 = async () => {
+        try {
+            const localStorageListL = await AsyncStorage.getItem('lunch');
+            return localStorageListL != null ? setfoodListL(JSON.parse(localStorageListL)) : null;
+        } catch (error) {
+
+        }
+    };
+    const restoreDataFromAsyncStorage3 = async () => {
+        try {
+            const localStorageListB = await AsyncStorage.getItem('breakfast');
+            return localStorageListB != null ? setfoodListB(JSON.parse(localStorageListB)) : null;
+        } catch (error) {
+        }
+    };
+
+    useEffect(() => {
+        restoreDataFromAsyncStorage();
+        restoreDataFromAsyncStorage2();
+        restoreDataFromAsyncStorage3();
+    }, []);
+
     useEffect(() => {
             if (route.params) {
                 let newState;
@@ -28,94 +57,107 @@ export default Home = ({navigation, route}) => {
                                 id: route.params.id,
                                 title: route.params.food_name,
                                 meal: route.params.meal,
+                                photo: route.params.photo.thumb,
                             },
                         ];
                         setfoodListB(newState);
+                        AsyncStorage.setItem('breakfast', JSON.stringify(newState));
                         break;
+
                     case 'lunch':
                         newState = [...foodListL, {
                             id: route.params.id,
                             title: route.params.food_name,
                             meal: route.params.meal,
+                            photo: route.params.photo.thumb,
                         }];
                         setfoodListL(newState);
+                        AsyncStorage.setItem('lunch', JSON.stringify(newState));
                         break;
                     case 'dinner':
                         newState = [...foodListD, {
                             id: route.params.id,
                             title: route.params.food_name,
                             meal: route.params.meal,
+                            photo: route.params.photo.thumb,
                         }];
                         setfoodListD(newState);
+                        AsyncStorage.setItem('dinner', JSON.stringify(newState));
                         break;
                     default:
                         break;
+
                 }
+
+
             }
+
 
         }, [route.params],
     );
 
-
     return (
         <>
+
             <SafeAreaView>
-                <View>
+                <ScrollView>
                     <View>
-                        <Text style={styles.globalTitle}>Aujourd'hui</Text>
-                    </View>
-                    <View style={styles.globalContainer}>
-                        <View style={styles.container}>
-                            <Text style={styles.titleMeal}> Petit Déjeuner </Text>
-                            <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment', {meal: 'breakfast'})}>
-                                <Text style={styles.buttonIconAdd}>+</Text>
-                            </TouchableOpacity>
-                        </View>
                         <View>
-                            {foodListB.length > 0 ? <FlatList
-                                data={foodListB}
+                            <Text style={styles.globalTitle}>Aujourd'hui</Text>
+                        </View>
+                        <View style={styles.globalContainer}>
+                            <View style={styles.container}>
+                                <Text style={styles.titleMeal}> Petit Déjeuner </Text>
+                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                                  onPress={() => navigation.navigate('AddAliment', {meal: 'breakfast'})}>
+                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                {foodListB.length > 0 ? <FlatList
+                                    data={foodListB}
+                                    renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                    keyExtractor={item => 'key' + Math.random(item.food_name)}
+                                /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
+
+                            </View>
+                        </View>
+                        <View style={styles.globalContainer}>
+                            <View style={styles.container}>
+                                <Text style={styles.titleMeal}>Déjeuner </Text>
+                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                                  onPress={() => navigation.navigate('AddAliment', {meal: 'lunch'})}>
+                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            <View>{foodListL.length > 0 ? <FlatList
+                                data={foodListL}
                                 renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            /> : <Text> Pas d'aliment selectionné</Text>}
+                            /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
 
+
+                            </View>
+                        </View>
+                        <View style={styles.globalContainer}>
+                            <View style={styles.container}>
+                                <Text style={styles.titleMeal}>Dîner</Text>
+                                <TouchableOpacity style={styles.buttonCircleAdd}
+                                                  onPress={() => navigation.navigate('AddAliment', {meal: 'dinner'})}>
+                                    <Text style={styles.buttonIconAdd}>+</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>{foodListD.length > 0 ? <FlatList
+                                data={foodListD}
+                                renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
+                                keyExtractor={item => 'key' + Math.random(item.food_name)}
+                            /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
+
+                            </View>
                         </View>
                     </View>
-                    <View style={styles.globalContainer}>
-                        <View style={styles.container}>
-                            <Text style={styles.titleMeal}>Déjeuner </Text>
-                            <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment', {meal: 'lunch'})}>
-                                <Text style={styles.buttonIconAdd}>+</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <View>{foodListL.length > 0 ? <FlatList
-                            data={foodListL}
-                            renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
-                            keyExtractor={item => 'key' + Math.random(item.food_name)}
-                        /> : <Text> Pas d'aliment selectionné</Text>}
-
-
-                        </View>
-                    </View>
-                    <View style={styles.globalContainer}>
-                        <View style={styles.container}>
-                            <Text style={styles.titleMeal}>Dîner</Text>
-                            <TouchableOpacity style={styles.buttonCircleAdd}
-                                              onPress={() => navigation.navigate('AddAliment', {meal: 'dinner'})}>
-                                <Text style={styles.buttonIconAdd}>+</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>{foodListD.length > 0 ? <FlatList
-                            data={foodListD}
-                            renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
-                            keyExtractor={item => 'key' + Math.random(item.food_name)}
-                        /> : <Text> Pas d'aliment selectionné</Text>}
-
-                        </View>
-                    </View>
-                </View>
+                </ScrollView>
             </SafeAreaView>
         </>
     );
@@ -154,7 +196,11 @@ const styles = StyleSheet.create({
         padding: 10,
 
     },
-
+    alimentTitle: {
+        margin: 13,
+        color: '#219BFE',
+        fontSize: 14,
+    },
     titleMeal: {
         fontSize: 20,
         fontWeight: '600',

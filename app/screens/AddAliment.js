@@ -66,7 +66,7 @@ export default AddAliment = ({route}) => {
             <View>
                 <FlatList
                     data={aliments}
-                    renderItem={({ item }) => <AddAlimentItem aliment={item} meal={route.params.meal}/>}
+                    renderItem={({ item }) => <AddAlimentItem aliment={item} meal={route.params.meal} />}
                     keyExtractor={item => 'key' + Math.random(item.food_name)}
                 />
             </View>
