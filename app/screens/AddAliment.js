@@ -18,22 +18,25 @@ export default AddAliment = ({route}) => {
     const [textInputValue, setTextInputValue] = React.useState('');
     const [aliments, setAliments] = useState([]);
     const getAliments = async () => {
-        let response = await fetch(
-            'https://trackapi.nutritionix.com/v2/search/instant/?query='+textInputValue, {
-                method : 'GET',
-                headers: {
-                    'x-app-id' : '47ab5f38',
-                    'x-app-key' : '0d3791cbe4d65eb19faa480b366986b5',
+        try {
+            let response = await fetch(
+                'https://trackapi.nutritionix.com/v2/search/instant/?query='+textInputValue, {
+                    method : 'GET',
+                    headers: {
+                        'x-app-id' : '47ab5f38',
+                        'x-app-key' : '0d3791cbe4d65eb19faa480b366986b5',
+                    }
                 }
-            }
-        );
-
+            );
 
         let jsonResponse = await response.json();
 
 
         if (jsonResponse) {
             setAliments(jsonResponse.common);
+        }
+    } catch (e) {
+            alert('Connectez vous au réseau internet')
         }
     };
 

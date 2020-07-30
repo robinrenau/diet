@@ -14,7 +14,6 @@ import TodayAlimentItem from '../components/TodayAlimentItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-
 export default Home = ({navigation, route}) => {
     const [foodListB, setfoodListB] = useState([]);
     const [foodListL, setfoodListL] = useState([]);
@@ -91,10 +90,7 @@ export default Home = ({navigation, route}) => {
                         break;
 
                 }
-
-
             }
-
 
         }, [route.params],
     );
@@ -122,9 +118,9 @@ export default Home = ({navigation, route}) => {
                             <View>
                                 {foodListB.length > 0 ? <FlatList
                                     data={foodListB}
-                                    renderItem={({item}) => <TodayAlimentItem aliment={item} />}
+                                    renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                     keyExtractor={item => 'key' + Math.random(item.food_name)}
-                                /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
+                                /> : <Text style={styles.alimentTitle}> Vous n'avez pas ajouté d'aliments pour ce repas</Text>}
 
                             </View>
                         </View>
@@ -145,7 +141,7 @@ export default Home = ({navigation, route}) => {
                                 data={foodListL}
                                 renderItem={({item}) => <TodayAlimentItem aliment={item} />}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
+                            /> : <Text style={styles.alimentTitle}> Vous n'avez pas ajouté d'aliments pour ce repas</Text>}
                             </View>
                         </View>
                         <View style={styles.globalContainer}>
@@ -164,14 +160,13 @@ export default Home = ({navigation, route}) => {
                                 data={foodListD}
                                 renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                 keyExtractor={item => 'key' + Math.random(item.food_name)}
-                            /> : <Text style={styles.alimentTitle}> Pas d'aliment selectionné</Text>}
+                            /> : <Text style={styles.alimentTitle}> Vous n'avez pas ajouté d'aliments pour ce repas</Text>}
 
                             </View>
                         </View>
                         <View style={styles.globalContainer}>
                             <View style={styles.container}>
                                 <Text style={styles.titleMeal}> Résumé </Text>
-
                             </View>
                         </View>
                 </ScrollView>

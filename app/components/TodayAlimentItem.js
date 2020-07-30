@@ -17,9 +17,7 @@ export default TodayAlimentItem = ({aliment}) => {
             />
             <Text
                 style={styles.alimentTitle}>{aliment.title}</Text>
-            <TouchableOpacity style={styles.buttonCircleDelete}
-
-            >
+            <TouchableOpacity style={styles.buttonCircleDelete}>
                 <Icon
                     name={'close-circle-outline'}
                     color="#219BFE"
