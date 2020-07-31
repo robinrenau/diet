@@ -120,7 +120,7 @@ export default Home = ({navigation, route}) => {
                                     data={foodListB}
                                     renderItem={({item}) => <TodayAlimentItem aliment={item}/>}
                                     keyExtractor={item => 'key' + Math.random(item.food_name)}
-                                /> : <Text style={styles.alimentTitle}> Vous n'avez pas ajouté d'aliments pour ce repas</Text>}
+                                /> : <Text style={styles.alimentTitle}>  Vous n'avez pas ajouté d'aliments pour ce repas</Text>}
 
                             </View>
                         </View>
